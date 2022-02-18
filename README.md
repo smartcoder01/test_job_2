@@ -31,3 +31,7 @@ php artisan migrate
 ```
 php artisan makeMove
 ```
+7. Отчет с ошибками можно найти по адресу:
+```
+/storage/app/failed.xlsx
+```
