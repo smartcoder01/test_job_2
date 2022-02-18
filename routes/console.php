@@ -14,6 +14,36 @@ use Illuminate\Support\Facades\Artisan;
 |
 */
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');
+Artisan::command('makeMove', function () {
+    $this->comment("Starting command move file to DB");
+
+    $filename = "random.csv";
+    $filename = $this->ask("Enter path to file: e.g. ($filename) or press 'Enter'",$filename);
+
+    if (\Storage::exists($filename)) {
+
+        $separator = $this->choice(
+            'Choice a separator?',
+            [',', ';',":"],
+            ","
+        );
+
+        $lines = explode(PHP_EOL, \Storage::get($filename));
+
+        $contents = [];
+        foreach ($lines as $key => $line) {
+            $contents[] = str_getcsv($line,$separator);
+        }
+
+
+        dd($contents);
+
+
+        dd($contents);
+
+    } else {
+        $this->error("File '$filename' not fount in /storage/app");
+    }
+
+
+});
